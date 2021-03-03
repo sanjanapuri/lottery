@@ -1,0 +1,129 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset ="utf-8">
+	<title>Lottery Simulator</title>
+	<link rel="stylesheet" href= "lotterystyles.css">
+</head>
+
+<!-- only works for 5 and in any order-->
+
+<body>
+	<script language ="javascript">
+		var winningnnumbers = [], repeat = 0, numberstring; 
+		var myrandom = [], myluckyball; 
+
+		//generate five random numbers 
+		for (i = 0; i < 5; i++){
+			num = Math.floor(Math.random() * 48) + 1; 
+			myrandom.push(num); 
+		}
+
+		//generate a random lucky ball number
+		myluckyball = Math.floor(Math.random() * 18) + 1;
+
+		//prompt user for winning numbers and lucky numbers
+		numberstring = prompt("Welcome to the Lottery Simulator! Please enter the five winning numbers (between 1 and 48), each separated by a space.");
+		userluckyball = prompt("Now, please input a 'Lucky Ball' number (between 1 and 18)!"); 
+
+		//add to the array and convert to integers 
+		winningnumbers = numberstring.split(" "); 
+		for(i=0; i<winningnumbers.length; i++){ 
+			winningnumbers[i] = +winningnumbers[i]; 
+		}
+
+		document.write("<h1>LOTTERY SIMULATOR</h1>")
+		document.write("<div><h2>WINNING NUMBERS + LUCKY BALL</h2>"); 
+		document.write("<table>"); 
+		document.write("<tr>"); 
+		for (i = 0; i < 5; i++){
+			document.write("<td><h3>" + winningnumbers[i] + "</h3>"); 
+		}
+		document.write("<td><h2>" + "+" + "</h2>"); 
+		document.write("<td><h3>" + userluckyball + "</h3>"); 
+		document.write("</tr>");
+		document.write("</table>"); 
+
+		document.write("<h2> GENERATED + LUCKY BALL</h2>"); 
+		document.write("<table>"); 
+		document.write("<tr>"); 
+		for (i = 0; i < 5; i++){
+			document.write("<td><h3>" + myrandom[i] + "</h3>"); 
+		}
+		document.write("<td><h2>" + "+" + "</h2>"); 
+		document.write("<td><h3>" + myluckyball + "</h3>"); 
+		document.write("</tr>");
+		document.write("</table>"); 
+		document.write("</div>"); 
+		
+		/*If there are two of the same - does not work*/
+		matches = 0; 
+		var nummatch = []; 
+		for(i=0; i < 5; i++){
+			index = 4-i; 
+			for(j = 0; j < 5; j++){
+				if(winningnumbers[index] == myrandom[j]){
+					matches++;
+					nummatch.push(myrandom[j]); 
+				}
+			}
+			winningnumbers.pop(); 
+		}
+
+		document.write("<section><table><tr>"); 
+		document.write("<td><h3>" + matches + "</h3>"); 
+		document.write("<td><h4>NUMBER MATCHES</h4>"); 
+		/*if (matches != 0){
+			document.write("<td><h4>(</h4>")
+			for(i = 0; i < matches; i++){
+				document.write("<td><h4>" + nummatch[i] + "</h4>"); 
+
+			}
+			document.write("<td><h4>)</h4>")
+		}*/
+		document.write("</tr></table>");
+
+		if(userluckyball == myluckyball){
+			document.write("<h4>LUCKY NUMBER MATCH!</h4>");
+		} else {
+			document.write("<h4>NO LUCKY BALL MATCH</h4>");
+		}
+		document.write("</section>"); 
+
+		document.write("</table>"); 
+
+		document.write("<div>"); 
+		document.write("<table>"); 
+		document.write("<tr>"); 
+		document.write("<td><h2>PAYOUT</h2>"); 
+		if((matches == 5) && (userluckyball == myluckyball)){
+			document.write("<td><h3>$7,000 a WEEK for LIFE!</h3>"); 
+
+		} else if (matches == 5){
+			document.write("<td><h3>$25,000 a YEAR for LIFE!</h3>");
+		} else if ((matches == 4) && (userluckyball == myluckyball)){
+			document.write("<td><h3>$5,000</h3>");
+		} else if (matches == 4){
+			document.write("<td><h3>$200</h3>");
+		} else if ((matches == 3) && (userluckyball == myluckyball)){
+			document.write("<td><h3>$150</h3>");
+		} else if (matches == 3){
+			document.write("<td><h3>$20</h3>");
+		} else if ((matches == 2) && (userluckyball == myluckyball)){
+			document.write("<td><h3>$25</h3>");
+		} else if (matches == 2){
+			document.write("<td><h3>$3</h3>");
+		} else if ((matches == 1) && (userluckyball == myluckyball)){
+			document.write("<td><h3>$6</h3>");
+		} else if ((matches == 1) && (userluckyball == myluckyball)){
+			document.write("<td><h3>$4</h3>");
+		} else {
+			document.write("<td><h3>$0</h3>");
+		}
+		document.write("</tr>");
+		document.write("</table>"); 
+		document.write("</div>");
+	</script>
+</body>
+
+
